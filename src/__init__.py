@@ -50,9 +50,9 @@ while keep_calculating:
                     print('Variance: ' + str(Calculate.variance(data)))
                     print('Standard Deviation: ' + str(Calculate.standard_deviation(data)))
         case operation if operation.lower() in linear_equation:
-            data = input("""Please input your equations in the following format ax+b = # separated by commas
-            5x+10 = 35, 8x-10 = 30""")
-            print('Value of X : ' + str(Calculate.solve_linear_eq(data)[0]))
+            data = input("""Please input your equations in the following format ax+by = # separated by commas
+            ex) 5x+10y = 35, 8x-10y = 30, Sorry for any inconvenience """)
+            print('Value of X, Y : ' + str(Calculate.solve_linear_eq(data)))
         case _:
             print('no matching operation')
             keep_calculating = Calculate.keep_calculating()
