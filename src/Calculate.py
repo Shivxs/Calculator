@@ -1,5 +1,6 @@
 import numpy as np
 import statistics as st
+import re
 
 TRUE = 'true yes 1'
 
@@ -27,10 +28,23 @@ def standard_deviation(nums):
 
 
 def solve_linear_eq(data):
-    # 5x+10 = 35, 8x-10 = 30
-    a = np.array([8, -10])
-    b = np.array([30])
-    return np.linalg.solve(a, b)
+    pattern = '[+-]*[0-9]*[a-zA-Z]'
+    coefficients = []
+    products = []
+    equations = data.split(',')
+    for eq in equations:
+        pieces = eq.split('=')
+        coefficients_raw = re.findall(pattern,pieces[0])
+        for co in coefficients_raw:
+            co = co[:-1].strip()
+            if not co or co is '+':
+                coefficients.append('1')
+            elif co is '-':
+                coefficients.append('-1')
+            else:
+                coefficients.append(co)
+        products.append(pieces[1].strip())
+    return np.linalg.solve(np.array(coefficients).reshape(2,2).astype(int), np.array(products).astype(int))
 
 
 def keep_calculating():
